@@ -3,6 +3,7 @@
 var app = angular.module('app', ['ngResource', 'ui.router','ui.bootstrap']);
 app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 
 	function($stateProvider, $urlRouterProvider, $httpProvider){
+		$urlRouterProvider.otherwise('/');
 		$stateProvider
 			.state('main', {
 				url: '/',
@@ -25,6 +26,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
 					title: 'Search'
 				}
 			});
+	}
+]);
+
+app.run(['$rootScope', '$state', '$stateParams',
+  function ($rootScope, $state, $stateParams) {
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
 }]);
 
 app.factory('resource', ['$resource', function($resource) {
