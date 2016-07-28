@@ -1,0 +1,100 @@
+<form class="form-horizontal" name="cac.addForm">
+	<div class="row">
+		<div class="alert alert-success" ng-show="cac.success">
+			<strong>Success!</strong> Added contact to the database
+		</div>
+		<div class="alert alert-danger" ng-show="cac.formErr">
+			<strong>Error!</strong> You must include at least a first name, last name, email address, and phone number.
+		</div>
+		<div class="alert alert-danger" ng-show="cac.addForm.bio.$invalid">
+			<strong>Error!</strong> Bio cannot be more that 500 chacacters
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label for="inputFirstName" class="col-sm-3 control-label">First Name*</label>
+				<div class="col-sm-6">
+					<input ng-model="cac.contact.firstName" name="fname" type="text" class="form-control" id="inputFirstName" placeholder="First Name" ng-required="true">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputLastName" class="col-sm-3 control-label">Last Name*</label>
+				<div class="col-sm-6">
+					<input ng-model="cac.contact.lastName" name="lname" type="text" class="form-control" id="inputLastName" placeholder="Last Name" ng-required="true">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputEmail3" class="col-sm-3 control-label">Email*</label>
+				<div class="col-sm-6">
+					<input ng-model="cac.contact.email" name="email" type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-required="true">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputPhone" class="col-sm-3 control-label">Phone</label>
+				<div class="col-sm-6">
+					<input ng-model="cac.contact.phone" name="phone" type="tel" pattern="[0-9]{10}" class="form-control" id="inputPhone" placeholder="Phone #">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputCompany" class="col-sm-3 control-label">Company</label>
+				<div class="col-sm-6">
+					<input ng-model="cac.contact.company" name="company" type="text" class="form-control" id="inputCompany" placeholder="Company">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputTitle" class="col-sm-3 control-label">Title</label>
+				<div class="col-sm-6">
+					<input ng-model="cac.contact.title" name="title" type="text" class="form-control" id="inputTitle" placeholder="Title">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="website" class="col-sm-3 control-label">Website</label>
+				<div class="col-md-6">
+					<input ng-model="cac.contact.website" name="website" type="text" class="form-control" id="website" placeholder="Website">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="website" class="col-sm-3 control-label">Category</label>
+				<div class="col-md-6">
+					<input ng-model="cac.contact.website" name="website" type="text" class="form-control" id="website" placeholder="Website">
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+<!-- 			<div class="form-group">
+				<label for="inputKeywords" class="col-sm-3 control-label">Keywords</label>
+				<div class="col-sm-6">
+					<input ng-model="cac.contact.keywords" name="keywords" type="text" class="form-control" id="inputKeywords" placeholder="Keywords">
+				</div>
+			</div> -->
+			<div class="form-group">
+				<label for="inputNotes" class="col-sm-3 control-label">Notes</label>
+				<div class="col-sm-6">
+					<input ng-model="cac.contact.notes" name="keywords" type="text" class="form-control" id="inputNotes" placeholder="Notes">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputKeywords" class="col-sm-3 control-label">Bio</label>
+				<div class="col-sm-6">
+					<textarea ng-model="cac.contact.bio" name="bio" type="text" class="form-control" id="inputKeywords" placeholder="Bio" cols="15" rows="10" ng-maxlength="1000"></textarea>
+					<p>Chacacter count remaining: {{ 1000 - cac.addForm.bio.$viewValue.length }}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputFile" class="col-sm-3 control-label">Upload Image</label>
+				<div class="col-sm-6">
+					<input id="exampleInputFile" type="file" ngf-select ng-model="$file" name="file" ngf-pattern="image/*" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+					<p class="help-block">This image will be used as their profile picture</p>			
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group">
+			<div class="col-sm-offset-5 col-sm-6">
+				<button type="submit" ng-click="cac.add($file)" class="btn btn-default" ng-disabled="!cac.addForm.$valid">Add</button>
+			</div>
+		</div>
+	</div>
+</form>

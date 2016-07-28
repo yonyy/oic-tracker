@@ -1,0 +1,26 @@
+<div class="modal-body">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="thumbnail">
+				<img src="../img/profile_pictures/{{img}}" alt="Profile Picture">
+			</div>
+		</div>
+		<div class="col-md-8">
+			<form>
+				<div class="form-group">
+					<label for="exampleInputFile" class="col-sm-2 control-label">Upload Image</label>
+					<div class="col-sm-10">
+						<input id="exampleInputFile" type="file" ngf-select ng-model="$file" name="file" ngf-pattern="image/*" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+						<p class="help-block">This image will be used as their profile picture</p>			
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<div class="col-sm-offset-2 col-sm-10">
+		<button class="btn btn-default" ng-click="ok($file)">OK</button>
+		<button class="btn btn-default" ng-click="cancel()">Cancel</button>
+	</div>
+</div>

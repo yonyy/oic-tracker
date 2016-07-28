@@ -1,0 +1,70 @@
+<form class="form-horizontal" name="csc.searchForm">
+	<div ng-show="">
+		
+	</div>
+	<div class="form-group">
+		<label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
+		<div class="col-sm-10">
+			<input ng-model="csc.query.firstName" name="fname" type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
+		<div class="col-sm-10">
+			<input ng-model="csc.query.lastName" name="lname" type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+		<div class="col-sm-10">
+			<input ng-model="csc.query.email" name="email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputPhone" class="col-sm-2 control-label">Phone</label>
+		<div class="col-sm-10">
+			<input ng-model="csc.query.phone" name="phone" type="tel" pattern="[0-9]{10}" class="form-control" id="inputPhone" placeholder="Phone #">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputCompany" class="col-sm-2 control-label">Company</label>
+		<div class="col-sm-10">
+			<input ng-model="csc.query.company" name="company" type="text" class="form-control" id="inputCompany" placeholder="Company">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="inputKeywords" class="col-sm-2 control-label">Keywords</label>
+		<div class="col-sm-10">
+			<input ng-model="csc.query.keywords" name="keywords" type="text" class="form-control" id="inputKeywords" placeholder="Keywords">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" ng-click="csc.search()" ng-disabled="csc.verifyAnInput()" class="btn btn-default">Search</button>
+		</div>
+	</div>
+	<div></div>
+</form>
+<div class="container">
+<div class="alert alert-danger" ng-show="!csc.rows.length && csc.queryExecuted">
+	No records found matching the parameters. Try changing or removing some parameters for a broader search.
+</div>
+<table ng-show="csc.rows.length" class="table table-hover">
+	<tr>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Email</th>
+		<th>Company</th>
+		<th>Title</th>
+		<td></td>
+	</tr>
+	<tr ng-repeat="contact in csc.rows">
+		<td>{{ contact.firstName}}</td>
+		<td>{{ contact.lastName }}</td>
+		<td>{{ contact.email }}</td>
+		<td>{{ contact.company }}</td>
+		<td>{{ contact.title }}</td>
+		<td><a ui-sref="main.contactId({ idContact: {{contact.idContact}} })">View More</a></td>
+	</tr>
+</table>
+</div>

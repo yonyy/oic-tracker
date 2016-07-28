@@ -1,0 +1,21 @@
+<div ng-show="!cc.rows.length">
+	<h2>No contacts to show.</h2>
+</div>
+<table ng-show="cc.rows.length" class="table table-hover">
+	<tr>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Email</th>
+		<th>Company</th>
+		<th>Title</th>
+		<td></td>
+	</tr>
+	<tr ng-repeat="contact in cc.rows | orderBy: ['lastName', 'firstName']">
+		<td>{{ contact.firstName}}</td>
+		<td>{{ contact.lastName }}</td>
+		<td>{{ contact.email }}</td>
+		<td>{{ contact.company }}</td>
+		<td>{{ contact.title }}</td>
+		<td><a ui-sref="main.contactId({ idContact: {{contact.idContact}} })">View More</a></td>
+	</tr>
+</table>
