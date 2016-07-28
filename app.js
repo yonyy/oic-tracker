@@ -18,12 +18,13 @@ var image = require('./routes/image');
 app.use('/api/contact', contact);
 app.use('/api/image', image);
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);
+app.set('ip', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
 
 var server = app.listen(app.get('port'), function () {
 	var host = server.address().address;
 	var port = server.address().port;
-	console.log('Server listening on http://%s:%s', host, port);
+	console.log("Express server listening at %s:%d ", app.get('ip'),app.get('port'));
 });
 
 module.exports = app;

@@ -1,7 +1,8 @@
 var mysql = require('mysql');
+var ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 
 var con = mysql.createConnection({
-	host: '127.0.0.1',
+	host: ip,
 	user: 'root',
 	password: '!nv3ntUcsd',
 	database: 'researcher'
@@ -12,7 +13,7 @@ con.connect(function(err){
 		console.log('Error connecting to Db');
 		return;
 	}
-	console.log('Connection Established');
+	console.log('Connection Established::'+ip);
 });
 
 module.exports = con;
