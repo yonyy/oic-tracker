@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var logger = require('morgan');
-var db = require('./models/index.js');
+//var db = require('./models/index.js');
 
 app.use(express.static(__dirname + '/bower_components'));
 app.use(express.static(__dirname + '/views'));
