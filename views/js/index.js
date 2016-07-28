@@ -112,4 +112,4 @@ app.factory('resource', ['$resource', function($resource) {
 	);
 
 	return self;
-}])
+}]);
