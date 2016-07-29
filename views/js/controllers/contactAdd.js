@@ -5,7 +5,20 @@ function($scope, $state, $stateParams, $filter, resource, Upload) {
 	var self = this;
 	self.rows = [];
 	self.contact = {};
+	self.allCategories = [
+		'Mentor',
+		'Speaker',
+		'Entreprenuer',
+		'Legal/Patents',
+		'Innovator',
+		'Sponsor',
+		'Faculty',
+		'Staff',
+		'Post/doc Grad',
+		'Undergrad'
+	];
 
+	self.selectedCategories = [];
 	self.formErr = false;
 	self.success = false;
 

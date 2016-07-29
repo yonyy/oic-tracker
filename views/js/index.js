@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('app', ['ngResource', 'ui.router','ui.bootstrap', 'ngFileUpload', 'angular-growl']);
+var app = angular.module('app', ['ngResource', 'ui.router','ui.bootstrap', 'ui.select','ngFileUpload', 'angular-growl', 'ngSanitize']);
 app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'growlProvider',
 	function($stateProvider, $urlRouterProvider, $httpProvider, growlProvider){
 		growlProvider.globalTimeToLive(3000);

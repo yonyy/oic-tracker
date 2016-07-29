@@ -54,12 +54,6 @@
 					<input ng-model="cac.contact.website" name="website" type="text" class="form-control" id="website" placeholder="Website">
 				</div>
 			</div>
-			<div class="form-group">
-				<label for="website" class="col-sm-3 control-label">Category</label>
-				<div class="col-md-6">
-					<input ng-model="cac.contact.website" name="website" type="text" class="form-control" id="website" placeholder="Website">
-				</div>
-			</div>
 		</div>
 		<div class="col-sm-6">
 <!-- 			<div class="form-group">
@@ -88,6 +82,21 @@
 					<p class="help-block">This image will be used as their profile picture</p>			
 				</div>
 			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-offset-1 col-sm-6">
+			<div class="form-group">
+				<ui-select multiple id="categories" ng-model="cac.selectedCategories" title="Choose one or more categories">
+					<ui-select-match placeholder="Select one or more categories...">{{$item}}</ui-select-match>
+					<ui-select-choices repeat="category in cac.allCategories | filter:$select.search">
+						{{category}}
+					</ui-select-choices>
+				</ui-select>
+			</div>
+		</div>
+		<div class="col-sm-5">
+			
 		</div>
 	</div>
 	<div class="row">
