@@ -1,7 +1,7 @@
 'use strict';
 angular.module('app').controller('contactAddController',
-['$scope', '$state', '$stateParams', '$filter', 'resource', 'Upload',
-function($scope, $state, $stateParams, $filter, resource, Upload) {
+['$scope', '$state', '$stateParams', '$filter', 'resource', '$uibModal', 'Upload',
+function($scope, $state, $stateParams, $filter, resource, $uibModal, Upload) {
 	var self = this;
 	self.rows = [];
 	self.contact = {};
@@ -21,6 +21,7 @@ function($scope, $state, $stateParams, $filter, resource, Upload) {
 	self.selectedCategories = [];
 	self.formErr = false;
 	self.success = false;
+	self.activities = [];
 
 	self.add = function(file) {
 		resource.contact.add(self.contact,
@@ -46,5 +47,20 @@ function($scope, $state, $stateParams, $filter, resource, Upload) {
 		function err(err) {
 			self.res = err;
 		})
+	}
+
+	self.addActivity = function() {
+		var modalInstance = $uibModal.open({
+			animation: true,
+			size: 'lg',
+			templateUrl: 'modals/modal-addActivity.html',
+			scope: $scope,
+			controller: 'addActivityController'
+		});
+		
+		modalInstance.result.then(function (activity){
+			console.log(activity);
+			self.activities.push(activity);
+		});
 	}
 }]);

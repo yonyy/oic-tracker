@@ -85,18 +85,35 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-offset-1 col-sm-6">
+		<div class="col-sm-6">
 			<div class="form-group">
-				<ui-select multiple id="categories" ng-model="cac.selectedCategories" title="Choose one or more categories">
-					<ui-select-match placeholder="Select one or more categories...">{{$item}}</ui-select-match>
-					<ui-select-choices repeat="category in cac.allCategories | filter:$select.search">
-						{{category}}
-					</ui-select-choices>
-				</ui-select>
+				<label for="categories" class="col-sm-3 control-label">Categories</label>
+				<div class="col-sm-6">
+					<ui-select multiple id="categories" ng-model="cac.selectedCategories" title="Choose one or more categories" style="width:300px;">
+						<ui-select-match placeholder="Select one or more categories...">{{$item}}</ui-select-match>
+						<ui-select-choices repeat="category in cac.allCategories | filter:$select.search">
+							{{category}}
+						</ui-select-choices>
+					</ui-select>
+				</div>
 			</div>
 		</div>
 		<div class="col-sm-5">
-			
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Activities <span class="label label-primary" style="cursor:pointer;" ng-click="cac.addActivity()">Add New</span></h3>
+				</div>
+				<div class="panel-body">
+					<uib-accordion close-others="false" ng-repeat="activity in cac.activities">
+						<div uib-accordion-group class="panel-default" heading="{{ activity.title }}">
+							<p>Date: {{ activity.date | date:'fullDate' }}</p>
+							<p>Location: {{ activity.location }}</p>
+							<p>Role: {{activity.role}}</p>
+							<p>Event: {{activity.event}}</p>
+						</div>
+					</uib-accordion>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="row">

@@ -1,0 +1,56 @@
+<div class="modal-header"><h3 class="modal-title">Add Activity</h3></div>
+<div class="modal-body">
+	<form name="addActivityForm" class="form-horizontal">
+		<div class="form-group">
+			<label for="title" class="col-sm-3 control-label">Title</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" name="title" id="title" ng-model="activity.title" ng-required="true">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="date" class="col-sm-3 control-label">Date</label>
+			<div class="col-sm-6">
+				<div class="input-group">
+					<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="activity.date" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="location" class="col-sm-3 control-label">Location</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" name="location" id="location" ng-model="activity.location" ng-required="true">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="role" class="col-sm-3 control-label">Role</label>
+			<div class="col-sm-6">
+				<ui-select id="role" ng-model="activity.role" title="Choose a role" style="width:300px;">
+					<ui-select-match placeholder="Select role...">{{$select.selected}}</ui-select-match>
+					<ui-select-choices repeat="role in allRoles | filter:$select.search">
+						{{role}}
+					</ui-select-choices>
+				</ui-select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="event" class="col-sm-3 control-label">Event</label>
+			<div class="col-sm-6">
+				<ui-select id="event" ng-model="activity.event" title="Choose one event" style="width:300px;">
+					<ui-select-match placeholder="Select event...">{{$select.selected}}</ui-select-match>
+					<ui-select-choices repeat="event in allEvents | filter:$select.search">
+						{{event}}
+					</ui-select-choices>
+				</ui-select>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<div class="col-sm-offset-2 col-sm-10">
+		<button class="btn btn-default" ng-disabled="formValidate()" ng-click="ok(activity)">OK</button>
+		<button class="btn btn-default" ng-click="cancel()">Cancel</button>
+	</div>
+</div>
