@@ -70,7 +70,7 @@ app.factory('resource', ['$resource', function($resource) {
 	var self = this;
 	self.contact = $resource('/api/contact/', null, 
 		{
-			'search' : {method : 'GET', url: '/api/contact/search', isArray: true, 
+			'search' : {method : 'GET', url: '/api/contact/search/', isArray: true, 
 				params: {
 					firstName: '@fname',
 					lastName: '@lname',
@@ -110,6 +110,37 @@ app.factory('resource', ['$resource', function($resource) {
 			'getById' : {method: 'GET', url: '/api/contact/:id', isArray: true, params: {id: '@id'}} 
 		}
 	);
+
+	self.activity = $resource('/api/activity/', null,
+		{
+			'add' : {method: 'POST', url:'/api/activity/', isArray: false,
+				params: {
+					event: '@event',
+					date: '@date',
+					title: '@title',
+					location: '@location'
+				}
+			},
+			'addRole' : {method: 'POST', url: '/api/activity/role/', isArray: false,
+				params: {
+					idContact: '@idContact',
+					idActivity: '@idActivity',
+					role: '@role'
+				}
+			}
+		}
+	);
+
+	self.category = $resource('/api/categories/', null,
+		{
+			'add' : {method: 'POST', url: '/api/categories/', isArray: false,
+				params: {
+					idContact: '@idContact',
+					category: '@category'
+				}
+			}
+		}
+	)
 
 	return self;
 }]);

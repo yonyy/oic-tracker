@@ -26,19 +26,50 @@ function($scope, $state, $stateParams, $filter, resource, $uibModal, Upload) {
 	self.add = function(file) {
 		resource.contact.add(self.contact,
 		function success(result) {
+			var idContact = result.insertId;
 			if (file) {
 				console.log(file);
-				file = Upload.rename(file, result.insertId.toString() + file.name.substr(file.name.lastIndexOf('.')));
+				file = Upload.rename(file, idContact.toString() + file.name.substr(file.name.lastIndexOf('.')));
 				Upload.upload({
 					url: '/api/image',
-					data: {file: file, idContact: result.insertId}
+					data: {file: file, idContact: idContact}
 				}).then(function (resp) {
-					console.log('Success ' + resp.config.data.file.name + ' uploaded. Response: ' + resp.data);
-					console.log(resp.data);
 					self.success = true;
-				}, function (resp) {
-					console.log('Error status: ' + resp.status);
-				}, function (evt) {});
+				}, function (resp) {}, function (evt) {});
+			}
+
+			for (var i = 0; i < self.selectedCategories.length; i++) {
+				var category = self.selectedCategories[i];
+				resource.category.add({idContact: idContact, category: category},
+					function success (result) {
+						console.log(result);
+					},
+					function err(err) {
+						console.log(err)
+					}
+				);
+			}
+			for (var i = 0; i < self.activities.length; i++) {
+				var activity = self.activities[i];
+				var role = activity.role;
+				activity.date = $filter('date')(activity.date, 'yyyy-MM-dd HH:mm:ss');
+				resource.activity.add(activity,
+					function success(result) {
+						var idActivity = result.insertId;
+						resource.activity.addRole({
+							idContact: idContact,
+							idActivity: idActivity,
+							role: role
+						}, function success(result) {
+							console.log(result);
+						}, function err(err) {
+							console.log(err);
+						});
+					},
+					function err(err) {
+						console.log(err);
+					}
+				);
 			}
 			self.success = true;
 			console.log(result);
@@ -50,17 +81,30 @@ function($scope, $state, $stateParams, $filter, resource, $uibModal, Upload) {
 	}
 
 	self.addActivity = function() {
+		self.activities.push({});
+		var index = self.activities.length - 1;
+		self.editActivity(index);
+	}
+
+	self.editActivity = function(index) {
 		var modalInstance = $uibModal.open({
 			animation: true,
 			size: 'lg',
 			templateUrl: 'modals/modal-addActivity.html',
 			scope: $scope,
+			resolve: {
+				activity: function() {
+					return JSON.parse(JSON.stringify(self.activities[index]));
+				},
+				index: function() {
+					return index;
+				}
+			},
 			controller: 'addActivityController'
 		});
 		
-		modalInstance.result.then(function (activity){
-			console.log(activity);
-			self.activities.push(activity);
+		modalInstance.result.then(function (result){
+			self.activities[result.index] = result.activity;
 		});
 	}
 }]);

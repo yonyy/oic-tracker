@@ -125,6 +125,6 @@ router.put('/:id', function(req, res) {
 			if (err) {res.send(err);}
 			res.json(result);
 		});
-})
+});
 
 module.exports = router;

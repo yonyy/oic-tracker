@@ -14,9 +14,17 @@ app.use(logger('dev'));
 
 var contact = require('./routes/contact');
 var image = require('./routes/image');
+var activity = require('./routes/activities');
+var category = require('./routes/categories');
+var activity_role = require('./routes/activity_role');
+
 
 app.use('/api/contact', contact);
 app.use('/api/image', image);
+app.use('/api/activity', activity);
+app.use('/api/activity/role', activity_role);
+app.use('/api/categories', category);
+
 
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);
 app.set('ip', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");

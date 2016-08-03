@@ -1,8 +1,8 @@
 'use strict';
 angular.module('app').controller('addActivityController',
-['$scope', '$state', '$stateParams', '$filter', 'resource', '$uibModalInstance',
-function($scope, $state, $stateParams, $filter, resource, $uibModalInstance) {
-	$scope.activity = {};
+['$scope', '$state', '$stateParams', '$filter', 'resource', '$uibModalInstance', 'activity', 'index',
+function($scope, $state, $stateParams, $filter, resource, $uibModalInstance, activity, index) {
+	$scope.activity = activity;
 	$scope.allEvents = ['Seminar', 'Workshop', 'Program']
 	$scope.dateOptions = {
 		formatYear: 'yy',
@@ -34,8 +34,8 @@ function($scope, $state, $stateParams, $filter, resource, $uibModalInstance) {
 		return !$scope.addActivityForm.$valid;
 	};
 
-	$scope.ok = function (activity) {
-		$uibModalInstance.close(activity);
+	$scope.ok = function (a) {
+		$uibModalInstance.close({activity: a, index: index});
 	};
 
 	$scope.cancel = function () {
