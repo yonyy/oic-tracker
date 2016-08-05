@@ -1,70 +1,111 @@
-<div class="container">
+<form class="form-horizontal" name="cic.updateForm">
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-sm-2">
 			<div class="thumbnail">
 				<a ng-click="cic.open()">
 					<img src="../img/profile_pictures/{{cic.img}}" alt="Profile Picture">
 				</a>
 			</div>
 		</div>
-		<div class="col-md-7">
-			<form class="form-horizontal" name="cic.updateForm">
-				<div class="form-group">
-					<label for="firstName" class="col-sm-2 control-label">First Name</label>
-					<div class="col-md-7">
-						<input ng-model="cic.contact.firstName" name="firstName" type="text" class="form-control" id="firstName" placeholder="First Name" ng-required="true">
-					</div>
+		<div class="col-sm-5">
+			<div class="form-group">
+				<label for="firstName" class="col-sm-3 control-label">First Name</label>
+				<div class="col-sm-7">
+					<input ng-model="cic.contact.firstName" name="firstName" type="text" class="form-control" id="firstName" placeholder="First Name" ng-required="true">
 				</div>
-				<div class="form-group">
-					<label for="lastName" class="col-sm-2 control-label">Last Name</label>
-					<div class="col-md-7">
-						<input ng-model="cic.contact.lastName" name="lastName" type="text" class="form-control" id="lastName" placeholder="Last Name" ng-required="true">
-					</div>
+			</div>
+			<div class="form-group">
+				<label for="lastName" class="col-sm-3 control-label">Last Name</label>
+				<div class="col-sm-7">
+					<input ng-model="cic.contact.lastName" name="lastName" type="text" class="form-control" id="lastName" placeholder="Last Name" ng-required="true">
 				</div>
-				<div class="form-group">
-					<label for="email" class="col-sm-2 control-label">Email</label>
-					<div class="col-md-7">
-						<input ng-model="cic.contact.email" name="email" type="text" class="form-control" id="email" placeholder="Email" ng-required="true">
-					</div>
+			</div>
+			<div class="form-group">
+				<label for="email" class="col-sm-3 control-label">Email</label>
+				<div class="col-sm-7">
+					<input ng-model="cic.contact.email" name="email" type="text" class="form-control" id="email" placeholder="Email" ng-required="true">
 				</div>
-				<div class="form-group">
-					<label for="phone" class="col-sm-2 control-label">Phone Number</label>
-					<div class="col-md-7">
-						<input ng-model="cic.contact.phone" name="phone" type="text" class="form-control" id="phone" placeholder="Phone #" pattern="[0-9]{10}">
-					</div>
+			</div>
+			<div class="form-group">
+				<label for="phone" class="col-sm-3 control-label">Phone Number</label>
+				<div class="col-sm-7">
+					<input ng-model="cic.contact.phone" name="phone" type="text" class="form-control" id="phone" placeholder="Phone #" pattern="[0-9]{10}">
 				</div>
-				<div class="form-group">
-					<label for="company" class="col-sm-2 control-label">Company</label>
-					<div class="col-md-7">
-						<input ng-model="cic.contact.company" name="company" type="text" class="form-control" id="company" placeholder="Company">
-					</div>
+			</div>
+			<div class="form-group">
+				<label for="company" class="col-sm-3 control-label">Company</label>
+				<div class="col-sm-7">
+					<input ng-model="cic.contact.company" name="company" type="text" class="form-control" id="company" placeholder="Company">
 				</div>
-				<div class="form-group">
-					<label for="title" class="col-sm-2 control-label">Title</label>
-					<div class="col-md-7">
-						<input ng-model="cic.contact.title" name="title" type="text" class="form-control" id="title" placeholder="Title">
-					</div>
+			</div>
+			<div class="form-group">
+				<label for="title" class="col-sm-3 control-label">Title</label>
+				<div class="col-sm-7">
+					<input ng-model="cic.contact.title" name="title" type="text" class="form-control" id="title" placeholder="Title">
 				</div>
-				<div class="form-group">
-					<label for="website" class="col-sm-2 control-label">Website</label>
-					<div class="col-md-7">
-						<input ng-model="cic.contact.website" name="website" type="text" class="form-control" id="website" placeholder="Website">
-					</div>
+			</div>
+			<div class="form-group">
+				<label for="website" class="col-sm-3 control-label">Website</label>
+				<div class="col-sm-7">
+					<input ng-model="cic.contact.website" name="website" type="text" class="form-control" id="website" placeholder="Website">
 				</div>
-				<div class="form-group">
-					<label for="bio" class="col-sm-2 control-label">Bio</label>
-					<div class="col-md-7">
-						<textarea ng-model="cic.contact.bio" name="bio" type="text" class="form-control" id="bio" placeholder="Bio" rows="10" cols="10" ng-maxlength="1000"></textarea>
-						<p>Character count remaining: {{ 1000 - cic.updateForm.bio.$viewValue.length }}</p>
-					</div>
+			</div>
+		</div>
+		<div class="col-md-5">
+			<div class="form-group">
+				<label for="inputNotes" class="col-sm-3 control-label">Notes</label>
+				<div class="col-sm-6">
+					<input ng-model="cic.contact.notes" name="keywords" type="text" class="form-control" id="inputNotes" placeholder="Notes">
 				</div>
-				<div class="form_group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" ng-click="cic.update(cic.file)" class="btn btn-default" ng-disabled="!cic.updateForm.$valid">Update</button>
-						<button type="submit" ng-click="cic.delete()" class="btn btn-default">Delete</button>
-					</div>
+			</div>
+			<div class="form-group">
+				<label for="bio" class="col-sm-3 control-label">Bio</label>
+				<div class="col-sm-7">
+					<textarea ng-model="cic.contact.bio" name="bio" type="text" class="form-control" id="bio" placeholder="Bio" rows="10" cols="10" ng-maxlength="1000"></textarea>
+					<p>Character count remaining: {{ 1000 - cic.updateForm.bio.$viewValue.length }}</p>
 				</div>
-			</form>
+			</div>
 		</div>
 	</div>
-</div>
+	<div class="row">
+		<div class="col-sm-offset-2 col-sm-5">
+			<div class="form-group">
+				<label for="categories" class="col-sm-3 control-label">Categories*</label>
+				<div class="col-sm-6">
+					<ui-select multiple id="categories" ng-model="cic.selectedCategories" title="Choose one or more categories" style="width:300px;" ng-required="true">
+						<ui-select-match placeholder="Select one or more categories...">{{$item}}</ui-select-match>
+						<ui-select-choices repeat="category in cic.allCategories | filter:$select.search">
+							{{category}}
+						</ui-select-choices>
+					</ui-select>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-5">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Activities <span class="label label-primary" style="cursor:pointer;" ng-click="cic.addActivity()">Add New</span></h3>
+				</div>
+				<div class="panel-body">
+					<uib-accordion close-others="false" ng-repeat="activity in cic.activities">
+						<div uib-accordion-group class="panel-default" heading="{{ activity.title }}">
+							<p>Date: {{ activity.date | date:'fullDate' }}</p>
+							<p>Location: {{ activity.location }}</p>
+							<p>Role: {{activity.role}}</p>
+							<p>Event: {{activity.event}}</p>
+							<p><a style="cursor:pointer;" ng-click="cic.editActivity($index)">Edit</a> <a style="cursor:pointer;" ng-click="cic.deleteActivity($index)">Delete</a></p>
+						</div>
+					</uib-accordion>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form_group">
+			<div class="col-sm-offset-5 col-sm-6">
+				<button type="submit" ng-click="cic.update(cic.file)" class="btn btn-default" ng-disabled="!cic.updateForm.$valid">Update</button>
+				<button type="submit" ng-click="cic.delete()" class="btn btn-default">Delete</button>
+			</div>
+		</div>
+	</div>
+</form>

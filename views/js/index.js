@@ -127,6 +127,16 @@ app.factory('resource', ['$resource', function($resource) {
 					idActivity: '@idActivity',
 					role: '@role'
 				}
+			},
+			'getActivity' : {method: 'GET', url: '/api/activity/:id', isArray: true,
+				params : {
+					id: '@id'
+				}
+			},
+			'getRole' : {method: 'GET', url: 'api/activity/role/:idContact', isArray: true,
+				params : {
+					idContact : '@idContact'
+				}
 			}
 		}
 	);
@@ -137,6 +147,11 @@ app.factory('resource', ['$resource', function($resource) {
 				params: {
 					idContact: '@idContact',
 					category: '@category'
+				}
+			},
+			'get' : {method: 'GET', url: '/api/categories/:idContact', isArray: true,
+				params: {
+					idContact: '@idContact'
 				}
 			}
 		}

@@ -56,12 +56,6 @@
 			</div>
 		</div>
 		<div class="col-sm-6">
-<!-- 			<div class="form-group">
-				<label for="inputKeywords" class="col-sm-3 control-label">Keywords</label>
-				<div class="col-sm-6">
-					<input ng-model="cac.contact.keywords" name="keywords" type="text" class="form-control" id="inputKeywords" placeholder="Keywords">
-				</div>
-			</div> -->
 			<div class="form-group">
 				<label for="inputNotes" class="col-sm-3 control-label">Notes</label>
 				<div class="col-sm-6">
@@ -87,9 +81,9 @@
 	<div class="row">
 		<div class="col-sm-6">
 			<div class="form-group">
-				<label for="categories" class="col-sm-3 control-label">Categories</label>
+				<label for="categories" class="col-sm-3 control-label">Categories*</label>
 				<div class="col-sm-6">
-					<ui-select multiple id="categories" ng-model="cac.selectedCategories" title="Choose one or more categories" style="width:300px;">
+					<ui-select multiple id="categories" ng-model="cac.selectedCategories" title="Choose one or more categories" style="width:300px;" ng-required="true">
 						<ui-select-match placeholder="Select one or more categories...">{{$item}}</ui-select-match>
 						<ui-select-choices repeat="category in cac.allCategories | filter:$select.search">
 							{{category}}
@@ -110,7 +104,7 @@
 							<p>Location: {{ activity.location }}</p>
 							<p>Role: {{activity.role}}</p>
 							<p>Event: {{activity.event}}</p>
-							<p><a style="cursor:pointer;" ng-click="cac.editActivity($index)">Edit</a></p>
+							<p><a style="cursor:pointer;" ng-click="cac.editActivity($index)">Edit</a> <a style="cursor:pointer;" ng-click="cac.deleteActivity($index)">Delete</a></p>
 						</div>
 					</uib-accordion>
 				</div>

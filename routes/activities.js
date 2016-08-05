@@ -17,4 +17,13 @@ router.post('/', function (req, res) {
 		});
 });
 
+router.get('/:id', function (req, res) {
+	mysql.query('SELECT * FROM activities WHERE idActivity = ? ', [req.params.id],
+		function(err, result) {
+			if (err) {throw err;}
+			res.json(result);
+		}
+	);
+});
+
 module.exports = router;

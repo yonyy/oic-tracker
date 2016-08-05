@@ -9,11 +9,20 @@ router.post('/', function (req, res) {
 	var role = req.body.role;
 	var values = [idContact, idActivity, role];
 
-	mysql.query('INSERT INTO activity_role (idContact, idActivity, role) VALUES (? , ? , ?)', values,
+	mysql.query('INSERT INTO activity_role (idContact_activity_role, idActivity_activity_role, role) VALUES (? , ? , ?)', values,
 		function(err, result) {
 			if (err) {throw err;}
 			res.json(result);
 		});
+});
+
+router.get('/:idContact', function(req, res) {
+	mysql.query('SELECT * FROM activity_role WHERE idContact_activity_role = ? ', [req.params.idContact],
+		function(err, result) {
+			if (err) {throw err;}
+			res.json(result);
+		}
+	);
 });
 
 module.exports = router;

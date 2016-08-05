@@ -28,7 +28,6 @@ function($scope, $state, $stateParams, $filter, resource, $uibModal, Upload) {
 		function success(result) {
 			var idContact = result.insertId;
 			if (file) {
-				console.log(file);
 				file = Upload.rename(file, idContact.toString() + file.name.substr(file.name.lastIndexOf('.')));
 				Upload.upload({
 					url: '/api/image',
@@ -106,5 +105,9 @@ function($scope, $state, $stateParams, $filter, resource, $uibModal, Upload) {
 		modalInstance.result.then(function (result){
 			self.activities[result.index] = result.activity;
 		});
+	}
+
+	self.deleteActivity = function(index) {
+		self.activities.splice(index, 1);
 	}
 }]);

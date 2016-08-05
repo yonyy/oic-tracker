@@ -5,12 +5,52 @@ function($scope, $state, growl, $stateParams, $filter, resource, $uibModal, Uplo
 	var self = this;
 	self.contact = {};
 	self.img = 'undefined.png';
+	self.allCategories = [
+		'Mentor',
+		'Speaker',
+		'Entreprenuer',
+		'Legal/Patents',
+		'Innovator',
+		'Sponsor',
+		'Faculty',
+		'Staff',
+		'Post/doc Grad',
+		'Undergrad'
+	];
+	self.selectedCategories = [];
+	self.activities = [];
 
 	resource.contact.getById({id: $stateParams.idContact},
-		function success(rows) {
-			self.contact = rows[0];
+		function success(contact) {
+			self.contact = contact[0];
 			self.contact.id = $stateParams.idContact;
 			self.img = self.contact.image;
+			
+			resource.category.get({idContact: self.contact.id},
+				function success(categories) {
+					for (var i = 0; i < categories.length; i++) {
+						self.selectedCategories.push(categories[i].category);
+					}
+				}, function err (err) {
+					console.log(err);
+				}
+			);
+
+			resource.activity.getRole({idContact: self.contact.id},
+				function success (roles) {
+					for (var i = 0; i < roles.length; i++) {
+						var role = roles[i];
+						resource.activity.getActivity({id: role.idActivity_activity_role},
+							function success (activity) {
+								activity[0].role = role.role;
+								self.activities.push(activity[0]);
+							}, function error(err) {
+								console.log(err);
+							}
+						);
+					}
+				})
+
 		},
 		function err(err) {
 			console.log(err)
@@ -74,5 +114,37 @@ function($scope, $state, growl, $stateParams, $filter, resource, $uibModal, Uplo
 			}
 		);
 	};
+
+	self.addActivity = function() {
+		self.activities.push({});
+		var index = self.activities.length - 1;
+		self.editActivity(index);
+	}
+
+	self.editActivity = function(index) {
+		var modalInstance = $uibModal.open({
+			animation: true,
+			size: 'lg',
+			templateUrl: 'modals/modal-addActivity.html',
+			scope: $scope,
+			resolve: {
+				activity: function() {
+					return JSON.parse(JSON.stringify(self.activities[index]));
+				},
+				index: function() {
+					return index;
+				}
+			},
+			controller: 'addActivityController'
+		});
+		
+		modalInstance.result.then(function (result){
+			self.activities[result.index] = result.activity;
+		});
+	}
+
+	self.deleteActivity = function(index) {
+		self.activities.splice(index, 1);
+	}
 
 }]);

@@ -8,11 +8,20 @@ router.post('/', function (req, res) {
 	var category = req.body.category;
 	var values = [idContact, category];
 
-	mysql.query('INSERT INTO categories (idContact, category) VALUES (?, ?)', values,
+	mysql.query('INSERT INTO categories (idContact_categories, category) VALUES (?, ?)', values,
 		function(err, result) {
 			if (err) {throw err;}
 			res.json(result);
 		})
+});
+
+router.get('/:idContact', function(req, res) {
+	mysql.query('SELECT * FROM categories WHERE idContact_categories = ?', [req.params.idContact],
+		function(err, result) {
+			if (err) {throw err;}
+			res.json(result);
+		}
+	);
 });
 
 module.exports = router;

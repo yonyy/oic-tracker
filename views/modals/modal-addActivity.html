@@ -27,7 +27,7 @@
 		<div class="form-group">
 			<label for="role" class="col-sm-3 control-label">Role</label>
 			<div class="col-sm-6">
-				<ui-select id="role" ng-model="activity.role" title="Choose a role" style="width:300px;">
+				<ui-select id="role" ng-model="activity.role" title="Choose a role" style="width:300px;" ng-required="true">
 					<ui-select-match placeholder="Select role...">{{$select.selected}}</ui-select-match>
 					<ui-select-choices repeat="role in allRoles | filter:$select.search">
 						{{role}}
@@ -38,7 +38,7 @@
 		<div class="form-group">
 			<label for="event" class="col-sm-3 control-label">Event</label>
 			<div class="col-sm-6">
-				<ui-select id="event" ng-model="activity.event" title="Choose one event" style="width:300px;">
+				<ui-select id="event" ng-model="activity.event" title="Choose one event" style="width:300px;" ng-required="true">
 					<ui-select-match placeholder="Select event...">{{$select.selected}}</ui-select-match>
 					<ui-select-choices repeat="event in allEvents | filter:$select.search">
 						{{event}}
