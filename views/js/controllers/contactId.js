@@ -81,6 +81,7 @@ function($scope, $state, growl, $stateParams, $filter, resource, $uibModal, Uplo
 	}
 
 	self.update = function(file) {
+		console.log(self.selectedCategories);
 		resource.contact.update(self.contact,
 			function success(result) {
 				if (file) {
@@ -101,7 +102,7 @@ function($scope, $state, growl, $stateParams, $filter, resource, $uibModal, Uplo
 				for (var i = 0; i < self.selectedCategories.length; i++) {
 					var category = self.selectedCategories[i];
 					if (!category.idCategories) {
-						resource.contact.add({category},
+						resource.category.add(category,
 							function success (row) {
 								console.log(row);
 							},
@@ -110,9 +111,9 @@ function($scope, $state, growl, $stateParams, $filter, resource, $uibModal, Uplo
 							}
 						)
 					} else {
-						resource.contact.update({category},
+						resource.category.update(category,
 							function success(result) {
-								console.log(row);
+								console.log(result);
 							},
 							function error(err) {
 								console.log(err);
@@ -124,7 +125,7 @@ function($scope, $state, growl, $stateParams, $filter, resource, $uibModal, Uplo
 				for (var i = 0; i < self.activities.length; i++) {
 					var activity = self.activities[i];
 					if (!activity.idActivity) {
-						resource.activity.add({activity},
+						resource.activity.add(activity,
 							function success (row) {
 								var idActivity = row.insertId;
 								resource.activity.addRole({
@@ -132,7 +133,7 @@ function($scope, $state, growl, $stateParams, $filter, resource, $uibModal, Uplo
 									idActivity: idActivity,
 									role: activity.role
 								}, function success(row) {
-									console.log(err);
+									console.log(row);
 								}, function error(err) {
 									console.log(err);
 								});
@@ -141,7 +142,7 @@ function($scope, $state, growl, $stateParams, $filter, resource, $uibModal, Uplo
 							}
 						);
 					} else {
-						resource.activity.update({activity},
+						resource.activity.update(activity,
 							function success(result) {
 								console.log(result);
 							},

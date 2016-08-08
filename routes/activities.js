@@ -35,4 +35,14 @@ router.delete('/:id', function(req, res) {
 	);
 });
 
+router.put('/:idActivity', function(req, res) {
+	var values = [req.body.event, req.body.date, req.body.title, req.body.location, req.params.idActivity]
+	mysql.query('UPDATE activities SET event = ?, date = ?, title = ?, location = ? WHERE idActivity = ?', values,
+		function(err, result) {
+			if (err) {throw err;}
+			res.json(result);
+		}
+	);
+});
+
 module.exports = router;
