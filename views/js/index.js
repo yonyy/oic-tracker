@@ -137,6 +137,20 @@ app.factory('resource', ['$resource', function($resource) {
 				params : {
 					idContact : '@idContact'
 				}
+			},
+			'update' : {method: 'PUT', url: 'api/activity/:idActivity', isArray:false,
+				params : {
+					idActivity: '@idActivity',
+					event: '@event',
+					date: '@date',
+					title: '@title',
+					location: '@location'
+				}
+			},
+			'delete' : {method: 'DELETE', url: 'api/activity/:id', isArray:false,
+				params: {
+					id: '@id'
+				}
 			}
 		}
 	);
@@ -151,7 +165,19 @@ app.factory('resource', ['$resource', function($resource) {
 			},
 			'get' : {method: 'GET', url: '/api/categories/:idContact', isArray: true,
 				params: {
-					idContact: '@idContact'
+					idContact: '@idContact',
+					category: '@category'
+				}
+			},
+			'update': {method: 'PUT', url:'/api/categories/:idCategories', isArray:false,
+				params: {
+					idCategories: '@idCategories',
+					category: '@category'
+				}
+			},
+			'delete': {method: 'DELETE', url:'/api/categories/:id', isArray: false,
+				params: {
+					id: '@id'
 				}
 			}
 		}

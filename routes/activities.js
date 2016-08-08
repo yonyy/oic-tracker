@@ -26,4 +26,13 @@ router.get('/:id', function (req, res) {
 	);
 });
 
+router.delete('/:id', function(req, res) {
+	mysql.query('DELETE FROM activities WHERE idActivity = ?', [req.params.id],
+		function(err, result) {
+			if (err) {throw err;}
+			res.json(result);
+		}
+	);
+});
+
 module.exports = router;

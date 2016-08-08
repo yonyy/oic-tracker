@@ -20,6 +20,10 @@ function($scope, $state, growl, $stateParams, $filter, resource, $uibModal, Uplo
 	self.selectedCategories = [];
 	self.activities = [];
 
+	for (var i = 0; i < self.allCategories.length; i++) {
+		self.allCategories[i] = {category: self.allCategories[i], idContact: $stateParams.idContact};
+	}
+
 	resource.contact.getById({id: $stateParams.idContact},
 		function success(contact) {
 			self.contact = contact[0];
@@ -29,7 +33,7 @@ function($scope, $state, growl, $stateParams, $filter, resource, $uibModal, Uplo
 			resource.category.get({idContact: self.contact.id},
 				function success(categories) {
 					for (var i = 0; i < categories.length; i++) {
-						self.selectedCategories.push(categories[i].category);
+						self.selectedCategories.push(categories[i]);
 					}
 				}, function err (err) {
 					console.log(err);
@@ -93,6 +97,61 @@ function($scope, $state, growl, $stateParams, $filter, resource, $uibModal, Uplo
 						growl.error('Error status: ' + resp.status);
 					}, function (evt) {});
 				}
+
+				for (var i = 0; i < self.selectedCategories.length; i++) {
+					var category = self.selectedCategories[i];
+					if (!category.idCategories) {
+						resource.contact.add({category},
+							function success (row) {
+								console.log(row);
+							},
+							function error(err) {
+								console.log(err);
+							}
+						)
+					} else {
+						resource.contact.update({category},
+							function success(result) {
+								console.log(row);
+							},
+							function error(err) {
+								console.log(err);
+							}
+						)
+					}
+				}
+
+				for (var i = 0; i < self.activities.length; i++) {
+					var activity = self.activities[i];
+					if (!activity.idActivity) {
+						resource.activity.add({activity},
+							function success (row) {
+								var idActivity = row.insertId;
+								resource.activity.addRole({
+									idContact: $stateParams.idContact,
+									idActivity: idActivity,
+									role: activity.role
+								}, function success(row) {
+									console.log(err);
+								}, function error(err) {
+									console.log(err);
+								});
+							}, function error(err) {
+								console.log(err);
+							}
+						);
+					} else {
+						resource.activity.update({activity},
+							function success(result) {
+								console.log(result);
+							},
+							function error(err) {
+								console.log(err);
+							}
+						);
+					}
+				}
+
 				growl.success('Updated Successfully');
 			},
 			function err (err) {

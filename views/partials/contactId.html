@@ -73,9 +73,9 @@
 				<label for="categories" class="col-sm-3 control-label">Categories*</label>
 				<div class="col-sm-6">
 					<ui-select multiple id="categories" ng-model="cic.selectedCategories" title="Choose one or more categories" style="width:300px;" ng-required="true">
-						<ui-select-match placeholder="Select one or more categories...">{{$item}}</ui-select-match>
-						<ui-select-choices repeat="category in cic.allCategories | filter:$select.search">
-							{{category}}
+						<ui-select-match placeholder="Select one or more categories...">{{$item.category}}</ui-select-match>
+						<ui-select-choices repeat="category in cic.allCategories | filter: $select.search">
+							<div ng-bind-html="category.category | highlight: $select.search"></div>
 						</ui-select-choices>
 					</ui-select>
 				</div>
@@ -105,6 +105,7 @@
 			<div class="col-sm-offset-5 col-sm-6">
 				<button type="submit" ng-click="cic.update(cic.file)" class="btn btn-default" ng-disabled="!cic.updateForm.$valid">Update</button>
 				<button type="submit" ng-click="cic.delete()" class="btn btn-default">Delete</button>
+				<button type="submit" ui-sref="main.contact" class="btn btn-default">Go Back</button>
 			</div>
 		</div>
 	</div>

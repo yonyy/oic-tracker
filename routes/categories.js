@@ -24,4 +24,22 @@ router.get('/:idContact', function(req, res) {
 	);
 });
 
+router.delete('/:id', function(req, res) {
+	mysql.query('DELETE FROM categories WHERE idCategories = ?', [req.params.id],
+		function(err, result) {
+			if (err) {throw err;}
+			res.json(result);
+		}
+	);
+});
+
+router.put('/:idCategories', function(req, res) {
+	mysql.query('UPDATE categories SET category = ? WHERE idCategories = ?', [req.body.category, req.params.idCategories],
+		function(err, result) {
+			if (err) {throw err;}
+			res.json(result)
+		}
+	);
+});
+
 module.exports = router;
